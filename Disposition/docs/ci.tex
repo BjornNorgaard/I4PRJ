@@ -1,3 +1,8 @@
 \section{Continious Integration}\label{sec:ci}
 
-Vi har løbende integreret system manuelt.
+Vi har løbende integreret system manuelt. En CI server som Jenkins har vi ikke kunnet bruge da systemet kører på flere \textbf{forskellige platforme}. Så for gruppen gav det ikke mening i forhold til tid at forsætte videre med dette.
+
+Jenkins er heller ikke brugt til unittests eller metrics. Dette var et overlagt valg da projektet var småt nok til at kunne køre test mm. lokalt uden problemer.
+
+Videre så integrerer Jenkins \textbf{ikke} med github, kun hvis vi kunne acceptere at den skulle bygge vores projekt periodisk - hvilket virkede fjollet for gruppen. 
+På baggrund af dette forsøgte jeg at få en \textbf{Travis CI} sat op. Dette lykkedes fint til unittest og billeder af processen kan ses i dokumentationen, Appendix A.
