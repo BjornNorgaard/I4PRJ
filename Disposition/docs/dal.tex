@@ -1,4 +1,39 @@
 \section{Data Access Layer}
 
-Vi begyndte udvikling tidligere end vi havde de relevante emner i dab.
+I dette projekt har vi udviklet en fungerende databasen med DAL. Vi har brugt \textbf{EF}, en ORM, som gjorde det muligt at komme tidligt i gang med DAL. 
 
+Indledningsvis brugte vi \textbf{DDS-lite} til at lave første udkast til systemet. Det viste sig omstændigt i længden, da store omstructureringer var meget normale i starten af projektet. 
+
+Med EF er det væsentligt lettere at lave ændringer i ER modellen, som ses på side~\pageref{fig:dbmodel}.\\
+
+DAL består primært af \textbf{tre komponenter}: 
+
+\begin{enumerate}
+	\item UserAccess.
+	\item PoolAccess.
+	\item DataAccess.
+\end{enumerate}
+
+Disse tre afhænger så af hinanden på forskellig vis. Eksempelvis har \textit{PoolAccess} en \textbf{association} til \textit{UserAccess}, som den eksempelvis bruger til at tjekke om en bruger findes i systemet, før den gennemfører oprettelsen af en pool.
+
+\subsection{Udfordringer}
+
+Et problem ved at teste en database, er at man ikke ved om ens framework \textbf{cacher} data som skrives til databasen. Så når vi forsøger at hente data ud af databasen ved vi faktisk ikke om det laver noget caching. Dette problem gik dog først op for os relativt sent, og på det tidspunkt så alt stadig ud til at virke korrket.
+
+I SWT fik vi først til sidst noget at vide om hvordan man kan teste en databasen og DAL. Grundet dette var vi nød til at improvisere i starten. 
+
+Alle test foregår på en \textbf{localdb}, for ikke at ødelægge data på skolens dab-server. Trods en localdb går det stadigt hurtigt at få kørt unittest.
+
+\subsection{TDD}
+
+Følgende er også beskrevet i dokumentationen fra side 149.
+
+Da vi i \textbf{SWT} lærte om Test-Driven Development, synes vi at det passede perfekt til DAL. Herfra var videre udvikling på databasen, forsøgt testdrevet. 
+
+På grund af dette har vi 98\% \textbf{coverage} i test af databasen. De manglende 2\% er autogenereret kode, som da billedet blev taget, ikke var ekskluderet fra coverage procenten.
+
+Et eksempel på et \textbf{testcase} kan ses på Code listing~\ref{code:test}, side~\pageref{code:test}.\\
+
+Jeg synes TDD har givet os en stor \textbf{trykhed} i udviklingen af databasen. Især når div. \textit{Access} klasser bruger hinanden. Disse klasser er også ofte blevet refactureret og ændret, i denne forbindelse har 100\% dækning med unittest givet en uundværlig sikkerhed omkring udvidelse og ændring af eksisterende kode.
+
+Selvfølgelig har det taget lidt \textbf{længere tid} at implementere en \textit{feature}, men jeg er fuldstændig sikker på at den brugte tid har tjent sig flere gange hjem. 

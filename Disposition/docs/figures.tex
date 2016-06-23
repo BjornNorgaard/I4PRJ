@@ -4,3 +4,13 @@
 \caption{Modellen som databasen er lavet ud fra.}
 \label{fig:dbmodel}
 \end{figure}
+
+\vskip5cm
+
+\begin{lstlisting}[caption=Eksempel på unittest af db.,label=code:test]
+[Test]
+public void AddPool_AddingPoolWithInvalidName_ReturnsFalse()
+{
+	Assert.That(_uut.AddPool(_testUser1.Email, "", 4), Is.False);
+}
+\end{lstlisting}
